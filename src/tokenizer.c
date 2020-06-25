@@ -32,7 +32,7 @@ int space_char(char c) {
    character (not tab or space).  
    Zero terminators are not printable (therefore false) */ 
 int non_space_char(char c) {
-  return (c != '\t' && c != ' ');
+  return ((c != '\t') && (c != ' '));
 }
 
 
@@ -41,6 +41,7 @@ int non_space_char(char c) {
    str does not contain any words. */
 char *word_start(char *str) {
   int i = 0; // count through str
+  
   // iterate to the next non space character or end of string
   while(/*str[i] != '\0'*/1==1) {
     if (non_space_char(str[i])) { // found first non space char
@@ -48,10 +49,11 @@ char *word_start(char *str) {
       return str + i; // return pointer to char
     }
 
-    if (str[i] == '\0') {
+    if (non_space_char(str[i]) == '\0') { // reached end of string
       printf("reached end of string:\n");
       return str + i;
     }
+    
     i++; // next char in str
   }
   
