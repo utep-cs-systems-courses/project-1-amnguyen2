@@ -19,9 +19,9 @@ int main() {
   printf("output:%c", t);
 
   if (t == '\0') {
-    printf("SUCCESS");
+    printf("\nSUCCESS");
   } else {
-    printf("FAIL");
+    printf("\nFAIL");
   }
   printf("\n");
   
