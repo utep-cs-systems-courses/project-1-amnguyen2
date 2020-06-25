@@ -57,7 +57,7 @@ char *word_start(char *str) {
       printf("found non space char:\n");
       return str + i; // return pointer to char
     }
-    if (non_space_char(str[i]) == '\0') { // reached end of string
+    if (str[i] == '\0') { // reached end of string
       printf("reached end of string:\n");
       return str + i;
     }
@@ -66,7 +66,7 @@ char *word_start(char *str) {
   
   // reached end of string
   printf("...\n");
-  return str + i - 1;
+  return str + i;
 }
 
 
