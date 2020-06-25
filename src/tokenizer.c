@@ -46,25 +46,23 @@ char *word_start(char *str) {
   int before_space = 1; // determine where currently am in str
   int i = 0; // count through str
 
-  char *end;
-  end = '\0';
   
   // iterate to the next non space character or end of string
   while(/*str[i] != '\0'*/1==1) {
     if (non_space_char(str[i])) { // found first non space char
       printf("found non space char:\n");
-      return str += i; // return pointer to char
+      return str + i; // return pointer to char
     }
 
     if (str[i] == '\0') {
-      return end;
+      return str + i;
     }
     i++; // next char in str
   }
   
   // reached end of string
   printf("reached end of string:\n");
-  return str += i;
+  return str + i;
 }
 
 
