@@ -11,9 +11,18 @@ int main() {
   printf("\n> You entered: %s\n", str);
   */
 
-  char s[] = {' ', ' ', '\0'};
-  //char *s = "  ";
-  printf("output:%c", *word_start(s));
+  //char s[] = {' ', ' ', '\0'};
+  char *s = "  ";
+  
+  char t = *word_start(s);
+
+  printf("output:%c", t);
+
+  if (t == '\0') {
+    printf("SUCCESS");
+  } else {
+    printf("FAIL");
+  }
   printf("\n");
   
   return 0;
@@ -43,23 +52,21 @@ char *word_start(char *str) {
   int i = 0; // count through str
   
   // iterate to the next non space character or end of string
-  while(/*str[i] != '\0'*/1==1) {
+  while(str[i] != '\0') {
     if (non_space_char(str[i])) { // found first non space char
       printf("found non space char:\n");
       return str + i; // return pointer to char
     }
-
     if (non_space_char(str[i]) == '\0') { // reached end of string
       printf("reached end of string:\n");
       return str + i;
     }
-    
     i++; // next char in str
   }
   
   // reached end of string
   printf("...\n");
-  return str + i;
+  return str + i - 1;
 }
 
 
