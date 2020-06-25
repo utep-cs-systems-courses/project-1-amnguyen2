@@ -10,11 +10,8 @@ int main() {
   fgets(str, sizeof(str), stdin);
   printf("\n> You entered: %s\n", str);
   */
-  char s[3];
-  s[0] = ' ';
-  s[1] = ' ';
-  s[2] = '\0';
-  //char s[] = {' ', ' ', '\0'};
+
+  char s[] = {' ', ' ', '\0'};
   //char *s = "  ";
   printf("output:%c", *word_start(s));
   printf("\n");
@@ -43,10 +40,7 @@ int non_space_char(char c) {
    space-separated word in zero-terminated str.  Return a zero pointer if 
    str does not contain any words. */
 char *word_start(char *str) {
-  int before_space = 1; // determine where currently am in str
   int i = 0; // count through str
-
-  
   // iterate to the next non space character or end of string
   while(/*str[i] != '\0'*/1==1) {
     if (non_space_char(str[i])) { // found first non space char
@@ -55,13 +49,14 @@ char *word_start(char *str) {
     }
 
     if (str[i] == '\0') {
+      printf("reached end of string:\n");
       return str + i;
     }
     i++; // next char in str
   }
   
   // reached end of string
-  printf("reached end of string:\n");
+  printf("...\n");
   return str + i;
 }
 
