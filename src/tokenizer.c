@@ -87,16 +87,33 @@ int count_words(char *str) {
 /* Returns a fresly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
 char *copy_str(char *inStr, short len) {
-  char *copy = (char*) malloc(len+1);
-  int i;
+  char *copy = (char*) malloc(len+1); // allocate memory
+
+  int i; // keep track of where we are in string 'inStr'
   for (i = 0; i < len; i++) {
-    copy[i] = inStr[i];
+    copy[i] = inStr[i]; // copy a character into a new string 'copy'
   }
-  copy[i] = '\0';
+  copy[i] = '\0'; // last char is zero-terminator
   
   return copy;
 }
-// allocate space = size of word + 1 char for zero-terminator
+
+
+/* Prints all tokens. */
+void print_tokens(char **tokens) {
+
+}
+
+
+/* Frees all tokens and the vector containing themx. */
+void free_tokens(char **tokens) {
+  int t = 0; // current token
+  while (tokens[t]) { // iterate through all tokens
+    free(tokens[t]); // "deallocate" current token
+    t++; // next token
+  }
+  free(tokens); // free pointer to pointer
+}
 
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
@@ -109,16 +126,5 @@ char *copy_str(char *inStr, short len) {
      tokens[3] = 0
 */
 char **tokenize(char* str) {
-
-}
-
-
-/* Prints all tokens. */
-void print_tokens(char **tokens) {
-
-}
-
-/* Frees all tokens and the vector containing themx. */
-void free_tokens(char **tokens) {
   
 }
