@@ -9,13 +9,23 @@ int main() {
   fgets(str, sizeof(str), stdin);
   printf("\n> You entered: %s\n", str);
 
-  char *s = "name";
-  printf("%x\n", &s[0]);
-  char *copy = copy_str(s, 4);
-  printf("%c%c%c%c\n", copy[0], copy[1], copy[2], copy[3]);
-  printf("%x\n", &s[0]);
-  printf("%x\n", &copy[0]);
-  return 0;
+  
+}
+
+
+/* Returns the length of the next whitespace separated word given a string. */
+short word_length(char *str) {
+  str = word_start(str); // go to first word
+  int i = 0; // current character in str
+  short count = 0; // count number of chars in next word
+  
+  while(non_space_char(str[i]) && (str[i] != '\0')) { // iterate to end of next word
+    i++; // next character
+    count++; // count +1 character
+    printf("%d : %c\n", count, str[i]);
+  }
+
+  return count;
 }
 
 
@@ -43,14 +53,13 @@ char *word_start(char *str) {
   
   // iterate to the next non space character or end of string
   while(1==1) {
-    if (non_space_char(str[i])) { // found first non space char
+    if (non_space_char(str[i])) { // found first non space char or end of string
       return str + i; // move pointer to current char and return
     }
     i++; // next char in str
   }
   
   // reached end of string
-  printf("...\n");
   return str + i;
 }
 
@@ -101,9 +110,13 @@ char *copy_str(char *inStr, short len) {
 
 /* Prints all tokens. */
 void print_tokens(char **tokens) {
-
+  int t = 0; // current token
+  while(tokens[t]) {
+    printf("tokens[%d] = %s", t, tokens[t]); // print token position and word
+    printf("\n");
+    t++; // next token
+  }
 }
-
 
 /* Frees all tokens and the vector containing themx. */
 void free_tokens(char **tokens) {
@@ -125,6 +138,20 @@ void free_tokens(char **tokens) {
      tokens[2] = "string" 
      tokens[3] = 0
 */
-char **tokenize(char* str) {
-  
+char **tokenize(char *str) {
+  int t = 0; // current token (word)
+  int num_words = count_words(str); // number of words in str
+  char **tokens = (char**) malloc(sizeof(char*) * (num_words+1)); // allocate memory for tokens
+
+  while (t < num_words) {
+    // get next word (token)
+    str = word_start(str); // go to start of word
+    char *curr_word = copy_str(str, word_length(str)); // save word 
+    str = word_terminator(str); // go to end of word
+
+    tokens[t] = curr_word; // add word as token to tokens
+
+    t++; // next token
+  }
+  return tokens;
 }
