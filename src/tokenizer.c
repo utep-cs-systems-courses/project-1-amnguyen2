@@ -8,7 +8,13 @@ int main() {
   printf("< ");
   fgets(str, sizeof(str), stdin);
   printf("\n> You entered: %s\n", str);
-  
+
+  char *s = "name";
+  printf("%x\n", &s[0]);
+  char *copy = copy_str(s, 4);
+  printf("%c%c%c%c\n", copy[0], copy[1], copy[2], copy[3]);
+  printf("%x\n", &s[0]);
+  printf("%x\n", &copy[0]);
   return 0;
 }
 
@@ -75,4 +81,44 @@ int count_words(char *str) {
   }
 
   return count;
+}
+
+
+/* Returns a fresly allocated new zero-terminated string 
+   containing <len> chars from <inStr> */
+char *copy_str(char *inStr, short len) {
+  char *copy = (char*) malloc(len+1);
+  int i;
+  for (i = 0; i < len; i++) {
+    copy[i] = inStr[i];
+  }
+  copy[i] = '\0';
+  
+  return copy;
+}
+// allocate space = size of word + 1 char for zero-terminator
+
+
+/* Returns a freshly allocated zero-terminated vector of freshly allocated 
+   space-separated tokens from zero-terminated str.
+
+   For example, tokenize("hello world string") would result in:
+     tokens[0] = "hello"
+     tokens[1] = "world"
+     tokens[2] = "string" 
+     tokens[3] = 0
+*/
+char **tokenize(char* str) {
+
+}
+
+
+/* Prints all tokens. */
+void print_tokens(char **tokens) {
+
+}
+
+/* Frees all tokens and the vector containing themx. */
+void free_tokens(char **tokens) {
+  
 }
