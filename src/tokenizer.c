@@ -3,27 +3,11 @@
 #include "tokenizer.h"
 
 int main() {
-  /*
   char str[200];
   printf("> Enter a word.\n");
   printf("< ");
   fgets(str, sizeof(str), stdin);
   printf("\n> You entered: %s\n", str);
-  */
-
-  //char s[] = {' ', ' ', '\0'};
-  char *s = "   ";
-  
-  char t = *word_start(s);
-
-  printf("output:%x", t);
-
-  if (t == '\0') {
-    printf("\nSUCCESS");
-  } else {
-    printf("\nFAIL");
-  }
-  printf("\n");
   
   return 0;
 }
@@ -53,15 +37,8 @@ char *word_start(char *str) {
   
   // iterate to the next non space character or end of string
   while(1==1) {
-    printf("%x\n", i);
     if (non_space_char(str[i])) { // found first non space char
-      printf("found non space char:\n");
-      return str + i; // return pointer to char
-    }
-    
-    if (str[i] == '\0') { // reached end of string
-      printf("reached end of string:\n");
-      return str + i;
+      return str + i; // move pointer to current char and return
     }
     i++; // next char in str
   }
@@ -74,26 +51,28 @@ char *word_start(char *str) {
 
 /* Returns a pointer terminator char following *word */
 char *word_terminator(char *word) {
-  return word;
+  int i = 0; // iterate through characters in 'word'
+  while (word[i] != '\0') { // iterate to end of 'word'
+    if (space_char(word[i])) { // found end of a word 
+      return word + i; // move pointer to current char and return
+    }
+    i++; // next character
+  }
+  return word + i;
 }
 
 
 /* Counts the number of words in the string argument. */
 int count_words(char *str) {
+  int count = 0; // keep count of number of words
+  str = word_start(str); // start counting from beginning of 1st word
   
-  return 0;
-  /*
-  int p1 = 0; // positions of chars in str
-  int p2 = 0;
-  int num = 1; // count number of words
-
-  // while current char is not a space char
-  while (non_space_char(str[p2]) == 1) {
-    p1 += 1;
-    p2 += 2;
+  while (*str != '\0') { // iterate to end of str
+    str = word_terminator(str); // go to end of current word
+    str = word_start(str); // go to beginning of next word
+    
+    count++; // count another word
   }
-  while (str[p2] != 
-  */
+
+  return count;
 }
-
-
