@@ -18,19 +18,21 @@ int main() {
     if (str[0] == '0') {
       printf("\n> EXITING PROGRAM\n");
       return 0;
+      
+    } else if (str[0] == '!') {
+      int n = str[1] - '0';
+      //printf("str[1] = %d\n", n);
+      printf("%s\n", get_history(history, n));
+
+    } else {
+      char **tokens;
+      tokens = tokenize(str); // tokenize
+
+      // add tokenized words to history
+      add_history(history, word_start(str));
+      print_history(history);
     }
     
-    char **tokens;
-    tokens = tokenize(str); // tokenize
-    print_tokens(tokens); // print tokens
-
-    // add tokenized words to history
-    int t = 0;
-    while (tokens[t]) {
-      add_history(history, tokens[t]);
-      t++;
-    }
-    print_history(history);
    
   } while (*str != '0');
 }
@@ -48,6 +50,18 @@ short word_length(char *str) {
   }
   return count;
 }
+
+/* Retuns the length of an entire string, including any whitespace and non-whitespace. */
+short str_length(char *str) {
+  int i = 0; // current char in str
+  short count = 0; // count number of chars in str
+  while (str[i] != '\0') {
+    i++;
+    count++;
+  }
+  return count;
+}
+
 
 
 /* Return true (non-zero) if c is a whitespace characer
