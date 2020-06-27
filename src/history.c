@@ -68,5 +68,12 @@ void print_history(List *list) {
 
 /* Free the history list and the strings it references. */
 void free_history(List *list) {
+  Item *temp = list->root; // temporary iterator to move through list
 
+  while(temp->next != NULL) { // iterate to end of list
+    free(temp); // free current item's info
+    temp = temp->next; // next item
+  }
+  free(list); // free list pointer
+  free(temp); // free temp pointer
 }
