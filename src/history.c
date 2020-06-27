@@ -45,19 +45,24 @@ char *get_history(List *list, int id) {
   Item *temp = list->root; // temporary iterator to move through list
   
   while (temp != NULL) { // iterate to end of list
-    if (temp->id == id) {
-      return temp->str;
+    if (temp->id == id) { // found specified id
+      return temp->str; // return item's str
     }
-    temp = temp->next;
+    temp = temp->next; // next item
   }
   
-  return temp->str;
+  return temp->str; 
 }
 
 
 /* Print the entire contents of the list. */
 void print_history(List *list) {
+  Item *temp = list->root; // temporary iterator to move through list
 
+  while(temp != NULL) { // iterate to end of list
+    printf("%d: %s", temp->id, temp->str); // print "id: str"
+    temp = temp->next; // next item in list
+  }
 }
 
 
