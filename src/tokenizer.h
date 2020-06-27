@@ -4,6 +4,9 @@
 /* Returns the length of the next whitespace separated word given a string. */
 short word_length(char *str);
 
+/* Retuns the length of an entire string, including any whitespace and non-whitespace. */
+short str_length(char *str);
+
 /* Return true (non-zero) if c is a whitespace characer
    ('\t' or ' ').  
    Zero terminators are not printable (therefore false) */
