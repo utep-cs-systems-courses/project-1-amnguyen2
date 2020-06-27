@@ -24,7 +24,7 @@ void add_history(List *list, char *str) {
     return;
   }
 
-  // the list has at least one item
+  // if the list has at least one item
   Item *temp = list->root; // temporary iterator to move through list
   int id = 1; // current item id in list
   
@@ -35,4 +35,33 @@ void add_history(List *list, char *str) {
 
   temp->next = item; // append item to list
   item->id++; // next id number
+}
+
+
+/* Retrieve the string stored in the node where Item->id == id.
+   List* list - the linked list
+   int id - the id of the Item to find */
+char *get_history(List *list, int id) {
+  Item *temp = list->root; // temporary iterator to move through list
+  
+  while (temp != NULL) { // iterate to end of list
+    if (temp->id == id) {
+      return temp->str;
+    }
+    temp = temp->next;
+  }
+  
+  return temp->str;
+}
+
+
+/* Print the entire contents of the list. */
+void print_history(List *list) {
+
+}
+
+
+/* Free the history list and the strings it references. */
+void free_history(List *list) {
+
 }
