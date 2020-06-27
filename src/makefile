@@ -5,4 +5,4 @@ tokenizer.o: tokenizer.c tokenizer.h
 	gcc -c tokenizer.c
 
 clean:
-	rm lab1 tokenizer.o "#tokenizer.c#" "#tokenizer.h#"
+	rm lab1 *.o
