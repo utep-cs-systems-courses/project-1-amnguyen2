@@ -5,6 +5,7 @@
 
 /* Initialize the linked list to keep the history. */
 List* init_history() {
+  printf("> Initializing history...\n");
   List *history = (List*) malloc(sizeof(List*) * 100); // allocate space for list
   return history;
 }
@@ -23,16 +24,16 @@ void add_history(List *list, char *str) {
     list->root = item; // add first item to list
     return;
   }
-
+  
   // if the list has at least one item
   Item *temp = list->root; // temporary iterator to move through list
-  int id = 1; // current item id in list
+  item->id = 1; // start at beginning
   
   while(temp->next != NULL) { // loop to end of list
-    id++;
+    item->id++; // increment id value
     temp = temp->next; // next item in list
   } // reached last item in list
-
+  
   temp->next = item; // append item to list
   item->id++; // next id number
 }
@@ -42,9 +43,10 @@ void add_history(List *list, char *str) {
    List* list - the linked list
    int id - the id of the Item to find */
 char *get_history(List *list, int id) {
+  printf("TEST");
   Item *temp = list->root; // temporary iterator to move through list
   
-  while (temp != NULL) { // iterate to end of list
+  while (temp->next != NULL) { // iterate to end of list
     if (temp->id == id) { // found specified id
       return temp->str; // return item's str
     }
@@ -59,10 +61,11 @@ char *get_history(List *list, int id) {
 void print_history(List *list) {
   Item *temp = list->root; // temporary iterator to move through list
 
-  while(temp != NULL) { // iterate to end of list
-    printf("%d: %s", temp->id, temp->str); // print "id: str"
+  while(temp->next != NULL) { // iterate to end of list
+    printf("\n%d: %s", temp->id, temp->str); // print "id: str"
     temp = temp->next; // next item in list
   }
+  printf("\n%d: %s", temp->id, temp->str); // print very last item
 }
 
 
