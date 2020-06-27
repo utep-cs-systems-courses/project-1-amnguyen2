@@ -3,26 +3,33 @@
 #include "tokenizer.h"
 
 int main() {
-  char str[200];
-  printf("> Enter a word.\n");
-  printf("< ");
-  fgets(str, sizeof(str), stdin);
-  printf("\n> You entered: %s\n", str);
+  char str[75]; // input is likely not more than 75 chars
 
-  
+  // program will ask for input as long as it isn't empty
+  printf("To end the program, enter no words");
+  do {
+    printf("\n> Enter input.");
+    printf("\n< ");
+    fgets(str, sizeof(str), stdin);
+    printf("\n> You entered: %s\n", str);
+
+    char **tokens;
+    tokens = tokenize(str);
+    print_tokens(tokens);
+    printf("\n%d\n", word_length(str));
+  } while (word_length(str) != 0 && (*str != '0'));
 }
 
 
 /* Returns the length of the next whitespace separated word given a string. */
 short word_length(char *str) {
   str = word_start(str); // go to first word
-  int i = 0; // current character in str
+  int i = 1; // current character in str (start with 1st)
   short count = 0; // count number of chars in next word
   
   while(non_space_char(str[i]) && (str[i] != '\0')) { // iterate to end of next word
-    i++; // next character
     count++; // count +1 character
-    printf("%d : %c\n", count, str[i]);
+    i++; // next character
   }
 
   return count;
@@ -127,8 +134,6 @@ void free_tokens(char **tokens) {
   }
   free(tokens); // free pointer to pointer
 }
-
-
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
    space-separated tokens from zero-terminated str.
 
@@ -153,5 +158,6 @@ char **tokenize(char *str) {
 
     t++; // next token
   }
+  tokens[t] = '\0';
   return tokens;
 }
