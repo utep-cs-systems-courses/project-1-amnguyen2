@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "history.h"
-
+#include "tokenizer.h"
 
 /* Initialize the linked list to keep the history. */
 List* init_history() {
@@ -17,7 +17,7 @@ List* init_history() {
 */
 void add_history(List *list, char *str) {
   Item *item = (Item*) malloc(sizeof(Item*) * 100); // allocate space for item
-  item->str = str; // set item's str value
+  item->str = copy_str(str, str_length(str)+1); // set item's str value
 
   if(list->root == NULL) { // if the list doesn't have an item (*root)
     item->id = 1; // set first item id
@@ -43,7 +43,6 @@ void add_history(List *list, char *str) {
    List* list - the linked list
    int id - the id of the Item to find */
 char *get_history(List *list, int id) {
-  printf("TEST");
   Item *temp = list->root; // temporary iterator to move through list
   
   while (temp->next != NULL) { // iterate to end of list
