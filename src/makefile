@@ -1,8 +1,10 @@
-lab1: tokenizer.o
-	gcc tokenizer.c -o lab1
+all: tokenizer
 
-tokenizer.o: tokenizer.c tokenizer.h
-	gcc -c tokenizer.c
+history.o: history.h
+tokenizer.o: tokenizer.h history.h
+
+tokenizer: history.o tokenizer.o
+	gcc history.c tokenizer.c -o lab1
 
 clean:
 	rm lab1 *.o
