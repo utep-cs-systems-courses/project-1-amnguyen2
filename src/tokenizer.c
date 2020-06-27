@@ -13,28 +13,27 @@ int main() {
     printf("\n> Enter input.");
     printf("\n< ");
     fgets(str, sizeof(str), stdin); // get input
-    printf("\n> You entered: %s\n", str);
+    printf("> You entered: %s", str);
 
-    if (str[0] == '0') {
+    if (str[0] == '0') { // user wants to exit program
       printf("\n> EXITING PROGRAM\n");
-      return 0;
+      return 0; // exit
       
-    } else if (str[0] == '!') {
-      int n = str[1] - '0';
-      //printf("str[1] = %d\n", n);
-      printf("%s\n", get_history(history, n));
-
-    } else {
+    } else if ((str[0] == '!') && (word_length(str) > 1)) { // user wants to input a command
+      int n = str[1] - '0'; // cast command argument into integer
+      if (n > 0) { // view a specific history item
+	printf("> %s\n", get_history(history, n));
+      } else { // view the entire history list
+	print_history(history);
+      }
+      
+    } else { // tokenize any other input and add to history
       char **tokens;
       tokens = tokenize(str); // tokenize
-
-      // add tokenized words to history
-      add_history(history, word_start(str));
-      print_history(history);
+      add_history(history, word_start(str)); // add tokenized words to history
     }
-    
    
-  } while (*str != '0');
+  } while (str_length(str) > 0);
 }
 
 
