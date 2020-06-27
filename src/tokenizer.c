@@ -15,6 +15,8 @@ int main() {
     fgets(str, sizeof(str), stdin); // get input
     printf("> You entered: %s", str);
 
+    printf("\n%d\n", str_length(str));
+    
     if (str[0] == '0') { // user wants to exit program
       printf("\n> EXITING PROGRAM\n");
       return 0; // exit
@@ -50,17 +52,18 @@ short word_length(char *str) {
   return count;
 }
 
+
 /* Retuns the length of an entire string, including any whitespace and non-whitespace. */
 short str_length(char *str) {
   int i = 0; // current char in str
   short count = 0; // count number of chars in str
+
   while (str[i] != '\0') {
     i++;
     count++;
   }
-  return count;
+  return count-1;
 }
-
 
 
 /* Return true (non-zero) if c is a whitespace characer
@@ -86,7 +89,7 @@ char *word_start(char *str) {
   int i = 0; // count through str
   
   // iterate to the next non space character or end of string
-  while(1==1) {
+  while(i < str_length(str)) {
     if (non_space_char(str[i])) { // found first non space char or end of string
       return str + i; // move pointer to current char and return
     }
@@ -101,6 +104,7 @@ char *word_start(char *str) {
 /* Returns a pointer terminator char following *word */
 char *word_terminator(char *word) {
   int i = 0; // iterate through characters in 'word'
+
   while (word[i] != '\0') { // iterate to end of 'word'
     if (space_char(word[i])) { // found end of a word 
       return word + i; // move pointer to current char and return
