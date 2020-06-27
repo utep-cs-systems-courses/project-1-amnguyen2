@@ -1,21 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokenizer.h"
+#include "history.h"
 
 int main() {
   char str[100]; // input is likely not more than 100 chars
-
+  List *history = init_history(); // initialize history of input
+  
   // program will ask for input as long as the first char isn't '0'
-  printf("To end the program, enter no words");
+  printf("> To end the program, enter 0");
   do {
     printf("\n> Enter input.");
     printf("\n< ");
-    fgets(str, sizeof(str), stdin);
+    fgets(str, sizeof(str), stdin); // get input
     printf("\n> You entered: %s\n", str);
+
+    if (str[0] == '0') {
+      printf("\n> EXITING PROGRAM\n");
+      return 0;
+    }
     
     char **tokens;
-    tokens = tokenize(str);
-    print_tokens(tokens);
+    tokens = tokenize(str); // tokenize
+    print_tokens(tokens); // print tokens
+
+    // add tokenized words to history
+    int t = 0;
+    while (tokens[t]) {
+      add_history(history, tokens[t]);
+      t++;
+    }
+    print_history(history);
+   
   } while (*str != '0');
 }
 
@@ -88,7 +104,7 @@ int count_words(char *str) {
   int count = 0; // keep count of number of words
   temp = word_start(temp); // start counting from beginning of 1st word
   
-  while (*temp != '\0') { // iterate to end of str
+  while (temp[0] != '\0') { // iterate to end of str
     temp = word_terminator(temp); // go to end of current word
     temp = word_start(temp); // go to beginning of next word
     
@@ -151,14 +167,14 @@ char **tokenize(char *str) {
   int num_words = count_words(temp); // number of words in str
   char **tokens = (char**) malloc(sizeof(char*) * (num_words+1)); // allocate memory for tokens
 
-  while ((t < num_words)) {
+  while (t < num_words) {
     // get next word (token)
     temp = word_start(temp); // go to start of word
     char *curr_word = copy_str(temp, word_length(temp)); // save word 
     temp = word_terminator(temp); // go to end of word
 
     tokens[t] = curr_word; // add word as token to tokens
-
+    
     t++; // next token
   }
   tokens[t] = '\0';
