@@ -22,7 +22,7 @@ int main() {
     } else if ((str[0] == '!') && (word_length(str) > 1)) { // user wants to input a command
       int n = str[1] - '0'; // cast command argument into integer
       if (n > 0) { // view a specific history item
-	printf("> %s\n", get_history(history, n));
+	printf("> %s", get_history(history, n));
       } else { // view the entire history list
 	print_history(history);
       }
@@ -34,6 +34,7 @@ int main() {
     }
    
   } while (str_length(str) > 0);
+  printf("\n> EXITING PROGRAM\n");
 }
 
 

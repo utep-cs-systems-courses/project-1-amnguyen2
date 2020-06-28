@@ -57,13 +57,14 @@ char *get_history(List *list, int id) {
 
 /* Print the entire contents of the list. */
 void print_history(List *list) {
+  printf("\n> Printing complete history of input...\n");
   Item *temp = list->root; // temporary iterator to move through list
 
   while(temp->next != NULL) { // iterate to end of list
-    printf("%d: %s", temp->id, temp->str); // print "id: str"
+    printf("> %d: %s", temp->id, temp->str); // print "id: str"
     temp = temp->next; // next item in list
   }
-  printf("%d: %s\n", temp->id, temp->str); // print very last item
+  printf("> %d: %s", temp->id, temp->str); // print very last item
 }
 
 
