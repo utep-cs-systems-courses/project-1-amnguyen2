@@ -14,8 +14,6 @@ int main() {
     printf("\n< ");
     fgets(str, sizeof(str), stdin); // get input
     printf("> You entered: %s", str);
-
-    printf("\n%d\n", str_length(str));
     
     if (str[0] == '0') { // user wants to exit program
       printf("\n> EXITING PROGRAM\n");
