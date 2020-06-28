@@ -5,6 +5,7 @@
 
 int main() {
   char str[100]; // input is likely not more than 100 chars
+  char **tokens; // tokens of input words from user
   List *history = init_history(); // initialize history of input
   
   // program will ask for input as long as the first char isn't '0'
@@ -16,8 +17,7 @@ int main() {
     printf("> You entered: %s", str);
     
     if (str[0] == '0') { // user wants to exit program
-      printf("\n> EXITING PROGRAM\n");
-      return 0; // exit
+      break; // exit program loop
       
     } else if ((str[0] == '!') && (word_length(str) > 1)) { // user wants to input a command
       int n = str[1] - '0'; // cast command argument into integer
@@ -28,14 +28,18 @@ int main() {
       }
       
     } else { // tokenize any other input and add to history
-      char **tokens;
       tokens = tokenize(str); // tokenize
       add_history(history, word_start(str)); // add tokenized words to history
     }
    
   } while (str_length(str) > 0);
+
+  // free memory
+  free_tokens(tokens);
+  free_history(history);
+  
   printf("\n> EXITING PROGRAM\n");
-}
+} 
 
 
 /* Returns the length of the next whitespace separated word given a string. */
