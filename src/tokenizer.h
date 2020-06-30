@@ -1,6 +1,9 @@
 #ifndef _TOKENIZER_
 #define _TOKENIZER_
 
+/* Returns the numerical value of a string. For example, if a str is "23", the method returns an integer value of 23. */
+int str_to_int(char *str);
+
 /* Returns the length of the next whitespace separated word given a string. */
 short word_length(char *str);
 

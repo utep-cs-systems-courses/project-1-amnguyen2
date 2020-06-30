@@ -16,30 +16,45 @@ int main() {
     fgets(str, sizeof(str), stdin); // get input
     printf("> You entered: %s", str);
     
-    if (str[0] == '0') { // user wants to exit program
+    // user wants to exit program
+    if (str[0] == '0') {
       break; // exit program loop
-      
-    } else if ((str[0] == '!') && (word_length(str) > 1)) { // user wants to input a command
-      int n = str[1] - '0'; // cast command argument into integer
+
+    // user wants to view a history item 
+    } else if ((str[0] == '!') && (word_length(str) > 1)) {
+      int n = str_to_int(str+1); // cast command argument into integer
+
       if (n > 0) { // view a specific history item
 	printf("> %s", get_history(history, n));
       } else { // view the entire history list
 	print_history(history);
       }
       
-    } else { // tokenize any other input and add to history
+    // tokenize any other input and add to history
+    } else {
       tokens = tokenize(str); // tokenize
       add_history(history, word_start(str)); // add tokenized words to history
     }
    
-  } while (str_length(str) > 0);
-
+  } while (str_length(str) > 0); // loop until no input
+  
   // free memory
   free_tokens(tokens);
   free_history(history);
   
   printf("\n> EXITING PROGRAM\n");
 } 
+
+
+/* Returns the numerical value of a string. For example, if a str is "23", the method returns an integer value of 23. */
+int str_to_int(char *str) {
+  int num = 0;
+
+  for(int i = 0; i < str_length(str); i++) {
+    num = num * 10 + str[i] - '0';  
+  }
+  return num;
+}
 
 
 /* Returns the length of the next whitespace separated word given a string. */
