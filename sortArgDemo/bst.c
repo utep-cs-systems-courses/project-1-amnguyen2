@@ -5,6 +5,7 @@ BstNode *root = 0;
 
 int bstStrcmp(char *a, char *b) /* return pos if string a > string b, 0 if equal, neg otherwise */
 {
+
   while (*a && *b) {		/* until end of string */
     int diff = *a++ - *b++;
     if (diff) return diff;	/* differed within string */
@@ -48,7 +49,10 @@ bstPrint(BstNode *root)		/* in order */
 {
   if (root == 0) return;
   bstPrint(root->children[0]);
-  puts(root->str); 
+  puts(root->str);
+  printf("Value: %x\n", *root);
+  printf("Address of value: %x\n", (void*)root);
+  printf("Address of pointer: %x\n", (void*)&root);
   bstPrint(root->children[1]);
 }
 
